@@ -1,9 +1,12 @@
 package com.jojeongmu.springeat.interfaces;
 
+import com.jojeongmu.springeat.domain.RestaurantRepository;
+import com.jojeongmu.springeat.domain.RestaurantRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,6 +21,10 @@ public class RestaurantControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @SpyBean(RestaurantRepositoryImpl.class)
+    // 어떤 구현체를 사용할 것인지 명시
+    private RestaurantRepository restaurantRepository;
 
     @Test
     public void list() throws Exception {
