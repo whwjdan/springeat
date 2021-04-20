@@ -29,10 +29,12 @@ public class Restaurant {
     }
 
     public List<MenuItem> getMenuItems(){
+
         return menuItems;
     }
 
     public void addMenuItem(MenuItem menuItem){
+
         menuItems.add(menuItem);
     }
 

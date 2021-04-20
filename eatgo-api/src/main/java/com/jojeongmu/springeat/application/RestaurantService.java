@@ -24,23 +24,15 @@ public class RestaurantService {
         this.menuItemRepository = menuItemRepository;
     }
 
-    public Restaurant getRestaurant(Long id){
-        Restaurant restaurant = restaurantRepository.findById(id);
-
-        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
-        restaurant.setMenuItems(menuItems);
-        return restaurant;
-    }
-
     public List<Restaurant> getRestaurants() {
         List<Restaurant> restaurants = restaurantRepository.findAll();
         return restaurants;
     }
 
-    public Restaurant getRestaurantById(Long id) {
+    public Restaurant getRestaurant(Long id) {
         Restaurant restaurant = restaurantRepository.findById(id);
+        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
+        restaurant.setMenuItems(menuItems);
         return restaurant;
     }
-
-
 }

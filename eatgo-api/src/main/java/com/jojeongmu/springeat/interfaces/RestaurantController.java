@@ -18,7 +18,6 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
-
     @GetMapping("/restaurant")
     public List<Restaurant> list(){
 /*
@@ -36,7 +35,7 @@ public class RestaurantController {
     @GetMapping("/restaurant/{id}")
     public Restaurant detail(@PathVariable("id") Long id) {
 
-        Restaurant restaurant = restaurantService.getRestaurantById(id);
+        Restaurant restaurant = restaurantService.getRestaurant(id);
         // 기본 정보 + 메뉴 정보
 
         return restaurant;
