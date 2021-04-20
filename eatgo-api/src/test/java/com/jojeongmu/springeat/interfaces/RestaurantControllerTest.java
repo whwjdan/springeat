@@ -1,5 +1,6 @@
 package com.jojeongmu.springeat.interfaces;
 
+import com.jojeongmu.springeat.application.RestaurantService;
 import com.jojeongmu.springeat.domain.MenuItemRepository;
 import com.jojeongmu.springeat.domain.MenuItemRepositoryImpl;
 import com.jojeongmu.springeat.domain.RestaurantRepository;
@@ -30,6 +31,9 @@ public class RestaurantControllerTest {
 
     @SpyBean(MenuItemRepositoryImpl.class)
     private MenuItemRepository menuItemRepository;
+
+    @SpyBean(RestaurantService.class)
+    private RestaurantService restaurantService;
 
     @Test
     public void list() throws Exception {

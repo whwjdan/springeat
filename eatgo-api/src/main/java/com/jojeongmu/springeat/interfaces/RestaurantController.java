@@ -1,5 +1,6 @@
 package com.jojeongmu.springeat.interfaces;
 
+import com.jojeongmu.springeat.application.RestaurantService;
 import com.jojeongmu.springeat.domain.MenuItem;
 import com.jojeongmu.springeat.domain.MenuItemRepository;
 import com.jojeongmu.springeat.domain.Restaurant;
@@ -15,10 +16,7 @@ import java.util.List;
 public class RestaurantController {
 
     @Autowired
-    private RestaurantRepository restaurantRepository;
-
-    @Autowired
-    private MenuItemRepository menuItemRepository;
+    private RestaurantService restaurantService;
 
 
     @GetMapping("/restaurant")
@@ -30,17 +28,17 @@ public class RestaurantController {
         restaurants.add(new Restaurant(2020L, "Cyber Food", "Seoul"));
 */
 
-        List<Restaurant> restaurants = restaurantRepository.findAll();
+        List<Restaurant> restaurants = restaurantService.getRestaurants();
 
         return restaurants;
     }
 
     @GetMapping("/restaurant/{id}")
     public Restaurant detail(@PathVariable("id") Long id) {
-        Restaurant restaurants = restaurantRepository.findById(id);
 
-        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
-        restaurants.setMenuItems(menuItems);
-        return restaurants;
+        Restaurant restaurant = restaurantService.getRestaurantById(id);
+        // 기본 정보 + 메뉴 정보
+
+        return restaurant;
     }
 }
