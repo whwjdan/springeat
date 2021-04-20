@@ -1,8 +1,9 @@
 package com.jojeongmu.springeat.interfaces;
 
+import com.jojeongmu.springeat.domain.MenuItem;
+import com.jojeongmu.springeat.domain.MenuItemRepository;
 import com.jojeongmu.springeat.domain.Restaurant;
 import com.jojeongmu.springeat.domain.RestaurantRepository;
-import com.jojeongmu.springeat.domain.RestaurantRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,11 @@ import java.util.List;
 public class RestaurantController {
 
     @Autowired
-    private RestaurantRepository repository;
+    private RestaurantRepository restaurantRepository;
+
+    @Autowired
+    private MenuItemRepository menuItemRepository;
+
 
     @GetMapping("/restaurant")
     public List<Restaurant> list(){
@@ -25,15 +30,17 @@ public class RestaurantController {
         restaurants.add(new Restaurant(2020L, "Cyber Food", "Seoul"));
 */
 
-        List<Restaurant> restaurants = repository.findAll();
+        List<Restaurant> restaurants = restaurantRepository.findAll();
 
         return restaurants;
     }
 
-    @GetMapping("/restaurants/{id}")
+    @GetMapping("/restaurant/{id}")
     public Restaurant detail(@PathVariable("id") Long id) {
-        Restaurant restaurants = repository.findById(id);
+        Restaurant restaurants = restaurantRepository.findById(id);
 
+        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
+        restaurants.setMenuItems(menuItems);
         return restaurants;
     }
 }

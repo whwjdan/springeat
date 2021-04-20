@@ -1,5 +1,7 @@
 package com.jojeongmu.springeat.interfaces;
 
+import com.jojeongmu.springeat.domain.MenuItemRepository;
+import com.jojeongmu.springeat.domain.MenuItemRepositoryImpl;
 import com.jojeongmu.springeat.domain.RestaurantRepository;
 import com.jojeongmu.springeat.domain.RestaurantRepositoryImpl;
 import org.junit.jupiter.api.Test;
@@ -26,6 +28,9 @@ public class RestaurantControllerTest {
     // 어떤 구현체를 사용할 것인지 명시
     private RestaurantRepository restaurantRepository;
 
+    @SpyBean(MenuItemRepositoryImpl.class)
+    private MenuItemRepository menuItemRepository;
+
     @Test
     public void list() throws Exception {
         mvc.perform(get("/restaurant"))
@@ -38,18 +43,21 @@ public class RestaurantControllerTest {
 
     @Test
     public void detail() throws Exception{
-        mvc.perform(get("/restaurants/1004"))
+        mvc.perform(get("/restaurant/1004"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
                         containsString("\"id\":1004")
                 ))
-                .andExpect(content().string(containsString("\"name\":\"Bob zip\"")));
+                .andExpect(content().string(containsString("\"name\":\"Bob zip\"")))
+                .andExpect(content().string(containsString("Kimchi")
+                ));
 
-        mvc.perform(get("/restaurants/2020"))
+        mvc.perform(get("/restaurant/2020"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
                         containsString("\"id\":2020")
                 ))
-                .andExpect(content().string(containsString("\"name\":\"Cyber Food\"")));
+                .andExpect(content().string(containsString("\"name\":\"Cyber Food\"")
+                ));
     }
 }
