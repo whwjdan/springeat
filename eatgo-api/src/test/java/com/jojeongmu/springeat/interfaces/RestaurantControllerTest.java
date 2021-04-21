@@ -18,8 +18,8 @@ import java.util.List;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(RestaurantController.class)
@@ -71,5 +71,13 @@ public class RestaurantControllerTest {
                 ))
                 .andExpect(content().string(containsString("\"name\":\"Cyber Food\"")
                 ));*/
+    }
+
+    @Test
+    public void create() throws Exception{
+        mvc.perform(post("/restaurant"))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("location","/restaurant/1234"))
+                .andExpect(content().string("{}"));
     }
 }
