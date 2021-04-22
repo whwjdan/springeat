@@ -19,6 +19,10 @@ public class Restaurant {
     public Restaurant() {
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

@@ -70,4 +70,12 @@ public class RestaurantServiceTest {
 
         assertThat(menuItem.getName()).isEqualTo("Kimchi");
     }
+
+    @Test
+    public void addRestaurant(){
+        Restaurant restaurant = new Restaurant("BeRyong","Busan");
+        Restaurant created = restaurantService.addRestaurant(restaurant);
+
+        assertThat(created.getId()).isEqualTo(1234L);
+    }
 }
