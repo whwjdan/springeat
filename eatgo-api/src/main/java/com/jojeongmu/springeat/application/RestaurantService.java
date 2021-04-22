@@ -5,7 +5,6 @@ import com.jojeongmu.springeat.domain.MenuItemRepository;
 import com.jojeongmu.springeat.domain.Restaurant;
 import com.jojeongmu.springeat.domain.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +35,8 @@ public class RestaurantService {
         return restaurant;
     }
 
-    public void addRestaurant(Restaurant restaurant) {
+    public Restaurant addRestaurant(Restaurant restaurant) {
+        restaurant.setId(1234L);
+        return restaurant;
     }
 }
