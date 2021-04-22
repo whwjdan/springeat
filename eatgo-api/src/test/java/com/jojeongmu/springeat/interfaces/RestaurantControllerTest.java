@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -77,7 +78,9 @@ public class RestaurantControllerTest {
 
     @Test
     public void create() throws Exception{
-        mvc.perform(post("/restaurant"))
+        mvc.perform(post("/restaurant")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"Beryong\",\"address\":\"Busan\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location","/restaurant/1234"))
                 .andExpect(content().string("{}"));
