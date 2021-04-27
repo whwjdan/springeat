@@ -47,7 +47,7 @@ public class RestaurantController {
             throws URISyntaxException {
         String name = resource.getName();
         String address = resource.getAddress();
-        Restaurant restaurant = new Restaurant(1234L, name, address);
+        Restaurant restaurant = new Restaurant(name, address);
         restaurantService.addRestaurant(restaurant);
 
         URI location = new URI("/restaurant/" + restaurant.getId());
