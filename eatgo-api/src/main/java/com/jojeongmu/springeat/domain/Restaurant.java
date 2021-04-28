@@ -66,4 +66,9 @@ public class Restaurant {
     public String getAddress() {
         return address;
     }
+
+    public void updateInformation(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 }
