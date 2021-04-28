@@ -22,12 +22,7 @@ public class RestaurantController {
 
     @GetMapping("/restaurant")
     public List<Restaurant> list(){
-/*
-        List<Restaurant> restaurants = new ArrayList<>();
 
-        restaurants.add(new Restaurant(1004L, "Bob zip", "Seoul"));
-        restaurants.add(new Restaurant(2020L, "Cyber Food", "Seoul"));
-*/
 
         List<Restaurant> restaurants = restaurantService.getRestaurants();
 
@@ -46,10 +41,12 @@ public class RestaurantController {
     @PostMapping("/restaurant")
     public ResponseEntity<?> create(@RequestBody Restaurant resource)
             throws URISyntaxException {
-        String name = resource.getName();
-        String address = resource.getAddress();
-        Restaurant restaurant = new Restaurant(name, address);
-        restaurantService.addRestaurant(restaurant);
+        Restaurant restaurant = restaurantService.addRestaurant(
+                Restaurant.builder()
+                .name(resource.getName())
+                .address(resource.getAddress())
+                .build()
+        );
 
         URI location = new URI("/restaurant/" + restaurant.getId());
         return ResponseEntity.created(location).body("{}");

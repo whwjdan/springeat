@@ -36,7 +36,11 @@ public class RestaurantControllerTest {
     @Test
     public void list() throws Exception {
         List<Restaurant> restaurants = new ArrayList<>();
-        restaurants.add(new Restaurant(1004L, "JOKER House", "Seoul"));
+        restaurants.add(Restaurant.builder()
+                .id(1004L)
+                .name("JOKER House")
+                .address("Seoul")
+                .build());
 
         given(restaurantService.getRestaurants()).willReturn(restaurants);
 
@@ -50,11 +54,14 @@ public class RestaurantControllerTest {
 
     @Test
     public void detail() throws Exception{
-        Restaurant restaurant = new Restaurant(1004L, "JOKER House", "Seoul");
+        Restaurant restaurant = Restaurant.builder()
+                .id(1004L)
+                .name("JOKER House")
+                .address("Seoul")
+                .build();
 
-        MenuItem menuItem = new MenuItem("Kimchi");
+        restaurant.setMenuItems(Arrays.asList(new MenuItem("Kimchi")));
 
-        restaurant.setMenuItems(Arrays.asList(menuItem));
         given(restaurantService.getRestaurant(1004L)).willReturn(restaurant);
 
         mvc.perform(get("/restaurant/1004"))
@@ -77,6 +84,15 @@ public class RestaurantControllerTest {
 
     @Test
     public void create() throws Exception{
+        given(restaurantService.addRestaurant(any())).will(invocation -> {
+            Restaurant restaurant = invocation.getArgument(0);
+            return Restaurant.builder()
+                    .id(1234L)
+                    .name(restaurant.getName())
+                    .address(restaurant.getAddress())
+                    .build();
+        });
+
         mvc.perform(post("/restaurant")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Beryong\",\"address\":\"Busan\"}"))
