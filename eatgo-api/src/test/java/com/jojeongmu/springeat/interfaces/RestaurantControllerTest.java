@@ -60,7 +60,11 @@ public class RestaurantControllerTest {
                 .address("Seoul")
                 .build();
 
-        restaurant.setMenuItems(Arrays.asList(new MenuItem("Kimchi")));
+        MenuItem menuItem = MenuItem.builder()
+                .name("Kimchi")
+                .build();
+
+        restaurant.setMenuItems(Arrays.asList(menuItem));
 
         given(restaurantService.getRestaurant(1004L)).willReturn(restaurant);
 
