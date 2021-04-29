@@ -59,6 +59,6 @@ public class RestaurantController {
         String address = restaurant.getAddress();
         restaurantService.updateRestaurant(id, name, address);
 
-        return "{}";
+        return "{1}";
     }
 }
