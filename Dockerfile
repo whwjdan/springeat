@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM openjdk:8-jdk
 EXPOSE 8080
 ARG JAR_FILE=eatgo-api/build/libs/*.jar
 COPY ${JAR_FILE} app.jar
