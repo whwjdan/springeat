@@ -7,8 +7,10 @@ import com.jojeongmu.springeat.domain.Restaurant;
 import com.jojeongmu.springeat.domain.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -39,7 +41,7 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurant")
-    public ResponseEntity<?> create(@RequestBody Restaurant resource)
+    public ResponseEntity<?> create(@Valid @RequestBody Restaurant resource)
             throws URISyntaxException {
         Restaurant restaurant = restaurantService.addRestaurant(
                 Restaurant.builder()
