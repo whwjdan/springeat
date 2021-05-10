@@ -15,7 +15,7 @@ import java.util.List;
 public class MenuItemController {
 
     @Autowired
-    MenuItemService menuItemService = new MenuItemService();
+    MenuItemService menuItemService;
 
     @PatchMapping("/restaurant/{restaurantId}/menuitems")
     public String bulkUpdate(
