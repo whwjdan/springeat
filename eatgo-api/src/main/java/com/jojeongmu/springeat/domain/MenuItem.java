@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class MenuItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @Setter
